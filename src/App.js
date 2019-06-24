@@ -4,10 +4,12 @@ import './config/ReactotronConfig';
 import { Provider } from 'react-redux';
 import store from './store';
 
+import Routes from './routes/index';
+
 function App() {
   return (
     <Provider store={store}>
-      <h1>Hello World!</h1>
+      <Routes />
     </Provider>
   );
 }
