@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   count: state.favorites.length,
 });
 
-Footer.prototype = {
+Footer.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
