@@ -12,12 +12,15 @@ class Main extends Component {
 
   static propTypes = {
     addFavoriteRequest: PropTypes.func.isRequired,
-    favorites: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      description: PropTypes.string,
-      url: PropTypes.string,
-    })).isRequired,
+    favorites: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        description: PropTypes.string,
+        url: PropTypes.string,
+      })),
+    }).isRequired,
   };
 
   handleRepository = (e) => {
@@ -26,6 +29,7 @@ class Main extends Component {
     const { repositoryInput } = this.state;
 
     addFavoriteRequest(repositoryInput);
+    this.setState({ repositoryInput: '' });
   }
 
   render() {
@@ -42,10 +46,11 @@ class Main extends Component {
             onChange={e => this.setState({ repositoryInput: e.target.value })}
           />
           <button type="submit">Adicionar</button>
+          {favorites.loading && <span>Carregando...</span>}
         </form>
         <ul>
-          {favorites.map(favorite => (
-            <li>
+          {favorites.data.map(favorite => (
+            <li key={favorite.id}>
               <p>
                 <strong>{favorite.name}</strong> {favorite.description}
               </p>
