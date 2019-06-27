@@ -20,6 +20,7 @@ class Main extends Component {
         description: PropTypes.string,
         url: PropTypes.string,
       })),
+      error: PropTypes.oneOfType(null, PropTypes.string),
     }).isRequired,
   };
 
@@ -47,6 +48,7 @@ class Main extends Component {
           />
           <button type="submit">Adicionar</button>
           {favorites.loading && <span>Carregando...</span>}
+          {!!favorites.error && <span>{favorites.error}</span>}
         </form>
         <ul>
           {favorites.data.map(favorite => (
